@@ -1,0 +1,99 @@
+# A function to determine if a string could be a float, 
+# in order to manage input verification with floating point numbers.
+def isfloat(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+# The beginning of the program proper:
+# The section handling the annual interest rate
+error_message = "You've entered an invalid input; please try again." #store an error message
+while True: # input verification for the interest rate
+    annual_rate = input("Enter your annual interest rate as a number from 0 to 100:\n")
+    if isfloat(annual_rate): #check if its a number
+        annual_rate = float(annual_rate)
+        if 0 <= annual_rate <= 100:  # The viable range of interest rates
+            annual_rate = annual_rate / 100 # making it easier to do math with
+            print("You've entered ", "{:,.2%}".format(annual_rate), ".\n", sep = "") # affirms interest rate
+            break
+        else: print(error_message)
+    else: print(error_message)
+
+
+# The section handling the balance
+current_balance = 0 #reset balance to 0 in the event of a failed or canceled pass
+while True: # input verification for the balance
+    current_balance = input("Enter the starting balance. Please enter a non-negative number.\n")
+    if isfloat(current_balance): #ensure entry is a number
+        current_balance = float(current_balance)
+        if current_balance >= 0: #ensure number is non-negative
+            print("You've entered ", "${:,.2f}".format(current_balance), ".\n", sep = "") # affirms balance
+            break
+        else: print(error_message)
+    else: print(error_message)
+        
+# The section handling how long the account has been open
+while True: # input verification for the account life
+    account_life = input("How many months has the account been open? \
+    \nPlease enter only entirely completed months between 0 months and 50 years (600 months): ")
+    if account_life.isnumeric(): #ensure entry is a number
+        account_life = int(account_life) #make entry an integer to deal with whole months
+        if 0 <= account_life < 600: #define range
+            print("You've entered", account_life, "months.\n")
+            break
+    print(error_message)
+
+    
+# The looping section, handling monthly deposits, monthly withdrawls, and monthly interest    
+monthly_rate = annual_rate / 12 #establishing a monthly rate of interest, so as not to repeat it a million times
+total_interest = 0 #accumulator for total interest
+total_deposists = 0 #accumulator for deposits
+total_withdrawls = 0 #accumulator for withdrawls
+for i in range(account_life):
+    print("----------------------------------------------------------")
+    print("Month", i + 1)
+    print("----------------------------------------------------------")
+    while True:  #input verification for deposits
+        monthly_deposit = input("Enter the amount deposited this month.    ")
+        if isfloat(monthly_deposit): #ensure entry is a number
+            monthly_deposit = float(monthly_deposit)
+            if monthly_deposit >= 0: #ensure number is non-negative
+                print("You've entered ", "${:,.2f}".format(monthly_deposit), ".", sep = "") # affirms deposit
+                current_balance += monthly_deposit #updates balance
+                total_deposists += monthly_deposit #updates total deposits
+                print("The updated balance is ", "${:,.2f}".format(current_balance), ".\n", sep = "") #displays updated balance
+                break
+            else: print(error_message)
+        else: print(error_message)
+    while True: #input verifications for withdrawls
+        monthly_withdrawl = input("Enter the amount withdrawn this month.    ")
+        if isfloat(monthly_withdrawl): #ensure entry is a number
+            monthly_withdrawl = float(monthly_withdrawl)
+            if monthly_withdrawl >= 0: #ensure number is non-negative
+                current_balance -= monthly_withdrawl #updates balance
+                total_withdrawls += monthly_withdrawl #updates total withdrawls
+                print("You've entered ", "${:,.2f}".format(monthly_withdrawl), ".", sep = "") # affirms deposit
+                print("The updated balance is ", "${:,.2f}".format(current_balance), ".\n", sep = "") #displays updated balance
+                break
+            else: print(error_message)
+        else: print(error_message)
+    print("The monthly rate is equal to the annual rate divided by 12.")
+    print("In this case, the monthly interest rate is: ", "{:,.2%}".format(monthly_rate), ".\n", sep = "")
+    monthly_interest = monthly_rate * current_balance #calculates the interest for this month
+    total_interest += monthly_interest #adds the monthly interest to the total interest
+    current_balance += monthly_interest #updates balance
+    print("The interest earned over this monthly period is ", "${:,.2f}".format(monthly_interest), ".", sep = "")
+    print("This brings the balance to ", "${:,.2f}".format(current_balance), ".", sep = "")
+    print("The running total of interest earned to date is ", "${:,.2f}".format(total_interest), ".\n", sep = "")
+
+# Final output of the function, describing all the changes suggested throughout the program execution.    
+print("----------------------------------------------------------")
+print("----------------------------------------------------------")            
+print("The final, total balance of the account is ", "${:,.2f}".format(current_balance), ".", sep = "")
+print("Total amount of deposits is ", "${:,.2f}".format(total_deposists) , ".", sep = "")
+print("Total amount of withdrawls is ", "${:,.2f}".format(total_withdrawls) , ".", sep = "")
+print("Total amount of interest over the term is ", "${:,.2f}".format(total_interest) , ".", sep = "")
+print("----------------------------------------------------------")
+print("----------------------------------------------------------")
