@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[12]:
 
 
 # Sets a variable for the discounted ticket price.
@@ -113,9 +113,14 @@ def carrier():
         airfares = int(airfares)
     
     # Input verification for the airfare to ensure its not less than or equal to zero. 
-    if airfares <= 0:
-        print("You have entered a value less than or equal to zero.")
-        airfares = float(input("Input whatever roundtrip airfare you feel like paying that's greater than zero.\t"))
+    while airfares <= 0:
+        print("You have entered a value less than or equal to zero.\n")
+        airfares = input("Input whatever roundtrip airfare you feel like paying that's greater than zero.\t")
+        if isfloat(airfares) == False:
+            print("\nInvalid entry. Ending program.\n")
+            return
+        else:
+            airfares = int(airfares)
         
     # Sets a global variable for the airfare to be used outside the function.
     global airfare 
@@ -154,10 +159,13 @@ def passenger():
         elif option_passengers == 4:
             passenger = 4
             break
+        else:
+            print("Invalid entry. Ending program.\n")
+            option_passengers = 0
+            return
     if option_passengers == 0:
-        print("Invalid entry. Ending program.\n")
-        option_passengers = 0
-        return
+            print("You've opted to exit. Ending program.\n")
+            return
 
     # Query to determine how many of the passengers are under 18.
     minor = input("How many passengers are under 18? Minors receive a 25% discount.\t")
@@ -168,8 +176,8 @@ def passenger():
         minor = int(minor)
     
     # Input verification to ensure minors isn't greater than the total passengers or negative.
-    if minor > passenger or minor < 0:
-        print("\nYou have entered an incorrect value.")
+    while minor > passenger or minor < 0:
+        print("\nYou have entered an incorrect value.\n")
         minor = int(input("How many passengers are under 18? Minors receive a 25% discount.\t"))
     
     # Converts local variables to global variables to be used outside the function.
