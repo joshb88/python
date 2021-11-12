@@ -22,7 +22,7 @@ while True:
     with open("Original.txt","w") as out_original:
 
         # Offer to randomly generate employee records (It's a lot of typing otherwise)
-        random_names_or_not = input("Do you want to randomly generate records? Y or N \t")
+        random_names_or_not = input("Do you want to randomly generate records? [Y] or [N] or [exit] \t")
         print("\n")
 
         # User elected to have them randomly generated
@@ -38,12 +38,12 @@ while True:
         elif random_names_or_not.lower() == "n":
 
             # Ask for individual info 20 times.
-            for employee in range(num_of_employees):
+            for employee in range(1,num_of_employees+1):
 
                 # Employee ID number with input verification
                 while True:
                     try:
-                        idnumber = int(input("Enter a 4 digit ID number for employee #%s: " % employee))  
+                        idnumber = int(input("Enter a 4 digit ID number for employee #%s: " % employee))
                         if idnumber in range(1000,10000):
                             out_original.write('%s ' % idnumber)
                             print("Entry accepted.\n")
@@ -75,7 +75,7 @@ while True:
                     try:
                         weeklyhours = int(input("How many hours does employee #%s work weekly? (0-50): " % employee))  
 
-                        if weeklyhours in range(50):
+                        if weeklyhours in range(51):
                             out_original.write('%s ' % weeklyhours)
                             print("Entry accepted.\n")
                             break
@@ -89,7 +89,7 @@ while True:
                 while True:
                     try:
                         hourlyrate = float(input("What is the hourly rate of employee #%s? (0-200):" % employee))
-                        if hourlyrate in range(200):
+                        if hourlyrate in range(201):
                             hourlyrate = "{:.2f}".format(hourlyrate)
                             out_original.write("%s " % hourlyrate)
                             print("Entry accepted.\n")
@@ -104,6 +104,10 @@ while True:
                 print("Employee #%s's record complete.\n" % employee)
             break
 
+        # A command to exit the loop
+        elif random_names_or_not.lower() == "exit":
+            break
+        
         # Informs user of invalid input, continues asking for value
         else:
             print("Invalid entry")
@@ -147,38 +151,41 @@ with open('Original.txt', 'r') as in_original, open("Copy.txt", "w") as copy:
         copy.write(" ".join(record_as_list) + "\n")
 
 # Open the Copy.txt in a Read
-with open("Copy.txt", "r") as copy:
-    display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
-    print("\n")
-    display.lower()
-    
-    # Ask how the user would like to view the data
-    for line in copy:
-        
-        # Take each value in the line as an element of a list, for easier arithmetic.
-        copy_record_as_list = line.split()
+if random_names_or_not.lower() != "exit":
+    with open("Copy.txt", "r") as copy:
+        display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
+        print("\n")
+        display.lower()
 
-        # Join first and last name elements as a single element
-        copy_record_as_list[1:3] = [' '.join(copy_record_as_list[1:3])]
+        # Ask how the user would like to view the data
+        for line in copy:
 
-        # Display data as it is stored: a list.
-        if display == "list":        
-            print(copy_record_as_list)
+            # Take each value in the line as an element of a list, for easier arithmetic.
+            copy_record_as_list = line.split()
 
-        # Display data as a string in a block of English.
-        elif display == "english":
-                print("Employee ID: " + copy_record_as_list[0])
-                print("Name: " + copy_record_as_list[1])
-                print("Weekly Hours Worked: " + copy_record_as_list[2])
-                print("Hourly Rate: " + "${:,.2f}".format(float(copy_record_as_list[3])))
-                print("Gross Pay: " + "${:,.2f}".format(float(copy_record_as_list[4])))
-                print("Tax: " + "${:,.2f}".format(float(copy_record_as_list[5])))
-                print("Net Pay: " + "${:,.2f}".format(float(copy_record_as_list[6])))
+            # Join first and last name elements as a single element
+            copy_record_as_list[1:3] = [' '.join(copy_record_as_list[1:3])]
+
+            # Display data as it is stored: a list.
+            if display == "list":        
+                print(copy_record_as_list)
+
+            # Display data as a string in a block of English.
+            elif display == "english":
+                    print("Employee ID: " + copy_record_as_list[0])
+                    print("Name: " + copy_record_as_list[1])
+                    print("Weekly Hours Worked: " + copy_record_as_list[2])
+                    print("Hourly Rate: " + "${:,.2f}".format(float(copy_record_as_list[3])))
+                    print("Gross Pay: " + "${:,.2f}".format(float(copy_record_as_list[4])))
+                    print("Tax: " + "${:,.2f}".format(float(copy_record_as_list[5])))
+                    print("Net Pay: " + "${:,.2f}".format(float(copy_record_as_list[6])))
+                    print("\n")
+
+            # Input verification
+            else:
+                print("Invalid Entry")
+                display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
                 print("\n")
-        
-        # Input verification
-        else:
-            print("Invalid Entry")
-            display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
-            print("\n")
-            display.lower()
+                display.lower()
+else:
+    print("Exiting")
