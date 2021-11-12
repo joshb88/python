@@ -1,7 +1,7 @@
 import random
 from random import randrange
 
-num_of_employees = 1
+num_of_employees = 20
 # Lists of names
 FIRST_NAME_LIST = ["Joshua", "Adam", "Brisa", "Zelda", "Sarah", "Henry", "Kevin",
                    "Brian", "Michael", "Lance", "Dwight", "Pamela", "Angela", "Kelly", "Oscar"]
@@ -25,12 +25,13 @@ while True:
         random_names_or_not = input("Do you want to randomly generate records? Y or N \t")
         print("\n")
 
+        # User elected to have them randomly generated
         if random_names_or_not.lower() == "y":
-            for emp_record in range(20):
+            for emp_record in range(num_of_employees):
                 for records in generate_employee_record():
                     out_original.write('%s ' % records)
                 out_original.write("\n")
-            print("20 employee records were randomly generated.")
+            print(str(num_of_employees) + " employee records were randomly generated.")
             break
 
         # User elected to write information themselves
@@ -162,7 +163,7 @@ with open("Copy.txt", "r") as copy:
 
         # Display data as it is stored: a list.
         if display == "list":        
-                print(copy_record_as_list)
+            print(copy_record_as_list)
 
         # Display data as a string in a block of English.
         elif display == "english":
@@ -174,6 +175,8 @@ with open("Copy.txt", "r") as copy:
                 print("Tax: " + "${:,.2f}".format(float(copy_record_as_list[5])))
                 print("Net Pay: " + "${:,.2f}".format(float(copy_record_as_list[6])))
                 print("\n")
+        
+        # Input verification
         else:
             print("Invalid Entry")
             display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
