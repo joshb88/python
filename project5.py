@@ -151,6 +151,7 @@ with open("Copy.txt", "r") as copy:
     print("\n")
     display.lower()
     
+    # Ask how the user would like to view the data
     for line in copy:
         
         # Take each value in the line as an element of a list, for easier arithmetic.
@@ -159,9 +160,11 @@ with open("Copy.txt", "r") as copy:
         # Join first and last name elements as a single element
         copy_record_as_list[1:3] = [' '.join(copy_record_as_list[1:3])]
 
+        # Display data as it is stored: a list.
         if display == "list":        
                 print(copy_record_as_list)
 
+        # Display data as a string in a block of English.
         elif display == "english":
                 print("Employee ID: " + copy_record_as_list[0])
                 print("Name: " + copy_record_as_list[1])
@@ -171,3 +174,8 @@ with open("Copy.txt", "r") as copy:
                 print("Tax: " + "${:,.2f}".format(float(copy_record_as_list[5])))
                 print("Net Pay: " + "${:,.2f}".format(float(copy_record_as_list[6])))
                 print("\n")
+        else:
+            print("Invalid Entry")
+            display = input("Would you like to read the data in a list or in blocks of plain English? (Either [list] or [english]) ")
+            print("\n")
+            display.lower()
