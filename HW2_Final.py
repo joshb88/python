@@ -101,17 +101,21 @@ if __name__ == '__main__':
 # ## Prob 2. [20 points] Counting Duplicate Words
 
 # ### Algorithm Steps:
-# 1. task 1
-#    - bullet 
-# 2. task 2
-#    - bullet
-# 3. ...
+# 1. Enter text into function to be used.
+#    - Check if anything is provided; otherwise, the function will default to the variable **text**.
+#    - If a string entry is used, convert the tuple the argument passes back into a string.
+# 2. Save the text entered as a lower case, in order to be properly evaluated in the dictionary later.
+# 3. Convert the variable entry, which is now a lowercase string, into a list.
+#    - This will allow the function to more easily convert the data into a dictionary.
+# 4. Creates a dictionary using the unique words (which appear more than once) as keys and their frequency as values.
+#    - Utilize dictionary comprehension to formulate the data as keys (the words) and values (their frequency).
+# 5. Display the results in a two-columned table.
 
-# In[23]:
+# In[126]:
 
 
 # Code for this Problem is copied into this function that will be run the in main program
-def p1_word_counts(text):
+def p1_word_counts(*str):
 
     # *******************************************************************************
     # EXPECTED OUTPUT FROM YOUR CODE
@@ -155,10 +159,50 @@ def p1_word_counts(text):
     # YOUR CODE MUST BE CORRECTLY INDENTED OR IT WONT RUN
     # *******************************************************************************
     
+
+
+    # The function will check if an argument was provided. 
+    # If not, it will default to the variable text.
+
+    if str == ():
+        entry = text
+        
+    # If a string was provided as the argument instead, 
+    # the function will convert the tuple output back into a string.
+    
+    else:
+        entry = "".join(str)
+
+    # Set the case of the string to lower to accurately evaluate.
+
+    entry = entry.lower()
+
+    # Makes a list out of the variable entry.           
+
+    words = entry.split()
+
+    # Creates a dictionary using the unique words as keys and their frequency as values, 
+    # if and only if the words appear more than once.        
+
+    counts = {word: words.count(word) for word in words if word in words if words.count(word) > 1}
+    interim = counts.items()
+    sorted_counts = dict(sorted(interim))
+
+
+    # Prints a 2 column table of the words and their counts
+    # In the instructions, it specifies a field width of 12, but it's actually 11.
+    
+    print('{:11}'.format("WORD"),"COUNT")
+    for key, value in sorted_counts.items():
+        print('{:11}'.format(key),value)
+
+text = ('this is sample Text with several words this is more sample text with some different Words')
+            
+p1_word_counts()
     
 
 
-# In[9]:
+# In[113]:
 
 
 # Run your code by calling the function 
@@ -181,17 +225,24 @@ if __name__ == '__main__':
 # ## Prob 3. [20 points] Duplicate Word Removal
 
 # ### Algorithm Steps:
-# 1. task 1
-#    - bullet 
-# 2. task 2
-#    - bullet
-# 3. ...
+# 1. Enter text into function to be used.
+#    - Check if anything is provided; otherwise, the function will default to the variable **text**.
+#    - If a string entry is used, convert the tuple the argument passes back into a string.
+# 2. Clean the data to be handled as a set.
+#     - Remove periods.
+#     - Force the case to lower.
+#     - Change the string into a list.
+# 3. Organize the relevant data.
+#     - Create a set of the list in order to keep only unique words.
+#     - Sort the set alphabetically.
+# 4. Display the information.
+#     - Print the data in a singular column.
 
-# In[24]:
+# In[118]:
 
 
 # Code for this Problem is copied into this function that will be run the in main program
-def p2_unique_words(text):
+def p2_unique_words(*str):
 
     # *******************************************************************************
     # EXPECTED OUTPUT FROM YOUR CODE
@@ -224,12 +275,42 @@ def p2_unique_words(text):
     # copying it here. 
     # YOUR CODE MUST BE CORRECTLY INDENTED OR IT WONT RUN
     # *******************************************************************************
+
+    # The function will check if an argument was provided. 
+    # If not, it will default to the variable text.
     
+    if str == ():
+        entry = text
+        
+    # If a string was provided as the argument instead, 
+    # the function will convert the tuple output back into a string.
+        
+    else:
+        entry = "".join(str)
     
+    # Remove periods, force the case to lower, and change the string into a list.
+    
+    entry = entry.replace(".","")
+    entry = entry.lower()
+    entry = entry.split()
+    
+    # Create a set, i.e. omit duplicate values, and sort it alphabetically from the list. 
+    
+    unique_words = sorted(set(entry))
+    
+    # Print the alphabetized set as a column.
+    
+    print("UNIQUE SORTED WORDS:")
+    for words in unique_words:  
+        print(words)
+    
+text = ('this is sample Text with several words this is more sample text with some different Words')    
+    
+p2_unique_words(text)
     
 
 
-# In[25]:
+# In[127]:
 
 
 # Run your code by calling the function 
@@ -319,7 +400,7 @@ if __name__ == '__main__':
     p3_Dictionary_Manipulations(d,params)
 
 
-# In[28]:
+# In[128]:
 
 
 # ************************************************************************
