@@ -323,13 +323,27 @@ if __name__ == '__main__':
 # ## Prob 4. [20 points] Dictionary Manipulations
 
 # ### Algorithm Steps:
-# 1. task 1
-#    - bullet 
-# 2. task 2
-#    - bullet
-# 3. ...
+# 1. Establish both the dictionary "d" and the parameters "params"
+#    - Both will be used to fetch data and manipulate it in the program 
+# 2. Check whether the dictionary contains the key 'Canada'.
+#    - Using indexing with the params list, check if the value associated with Canada is in the dictionary's keys.
+# 3. Check whether the dictionary contains the key 'France'.
+#    - Using the same method, perform the same task with France.
+# 4. Iterate through the key–value pairs and display them in two-column format.
+#     - Use a for loop to print each key and value inline.
+# 5. Add a key-value pair, Sweden: sw, to the dictionary.
+# 6. Correct the same, newly added key-value pair with a new value.
+#     - Change the value from "sw" to "se".
+# 7. Inverse the keys and values through the use of the dictionary comprehension.
+# 8. Utilize dictionary comprehension again to capitalise the names of the countries.
 
-# In[26]:
+# In[131]:
+
+
+d = {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx'}
+
+
+# In[16]:
 
 
 # Code for this Problem is copied into this function that will be run the in main program
@@ -348,13 +362,13 @@ def p3_Dictionary_Manipulations(d,params):
     >>> params = ['Canada','France','sw','se']
     >>> p3_Dictionary_Manipulations(d,params)
     Dictionary is:
-    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx'}
+    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx'} 
     <BLANKLINE>
     a. Canada in dict:
-    True
+    True 
     <BLANKLINE>
     b. France in dict:
-    False
+    False 
     <BLANKLINE>
     c. Keys and values in dict (key in field width 20):
     Canada              ca
@@ -362,16 +376,16 @@ def p3_Dictionary_Manipulations(d,params):
     Mexico              mx
     <BLANKLINE>
     d. Dict with Sweden set to 'sw':
-    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx', 'Sweden': 'sw'}
+    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx', 'Sweden': 'sw'} 
     <BLANKLINE>
     e. Dict with Sweden corrected to 'se':
-    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx', 'Sweden': 'se'}
+    {'Canada': 'ca', 'United States': 'us', 'Mexico': 'mx', 'Sweden': 'se'} 
     <BLANKLINE>
     f. Reverse mapping using dictionary comprehension:
-    {'ca': 'Canada', 'us': 'United States', 'mx': 'Mexico', 'se': 'Sweden'}
+    {'ca': 'Canada', 'us': 'United States', 'mx': 'Mexico', 'se': 'Sweden'} 
     <BLANKLINE>
     g. Reverse mapping uppercase using dictionary comprehension:
-    {'ca': 'CANADA', 'us': 'UNITED STATES', 'mx': 'MEXICO', 'se': 'SWEDEN'}
+    {'ca': 'CANADA', 'us': 'UNITED STATES', 'mx': 'MEXICO', 'se': 'SWEDEN'} 
     <BLANKLINE>
     """
 
@@ -383,10 +397,51 @@ def p3_Dictionary_Manipulations(d,params):
     # *******************************************************************************
     
     
+    print("Dictionary is:")
+    print(d, "\n")
+
+    # Check whether the dictionary contains the key 'Canada'.
     
+    print("a. Canada in dict:")
+    print(params[0] in d,"\n")
+    
+    # Check whether the dictionary contains the key 'France'.
+    
+    print("b. France in dict:")
+    print(params[1] in d,"\n")
+    
+    # Iterate through the key–value pairs and display them in two-column format.
+    
+    print("c. Keys and values in dict (key in field width 20):")
+    for key in d:
+        print('{:20}'.format(key),d[key], sep = "")
+        
+    # Add the key-value pair to the dictionary.
+    
+    print("\nd. Dict with Sweden set to 'sw':")
+    d["Sweden"] = params[2]
+    print(d,"\n")
+    
+    # Update the key-value pair to correct the mistaken value.
+    
+    print("e. Dict with Sweden corrected to 'se':")
+    d["Sweden"] = params[3]
+    print(d,"\n")
+    
+    # Use a dictionary comprehension to reverse the keys and values.
+    
+    print("f. Reverse mapping using dictionary comprehension:")
+    d2 = {tld: country for country, tld in d.items()}
+    print(d2,"\n")
+    
+    # Use a dictionary comprehension to convert the country names to all uppercase letters.
+    
+    print("g. Reverse mapping uppercase using dictionary comprehension:")
+    d2 = {tld: country.upper() for tld, country in d2.items()}
+    print(d2,"\n")    
 
 
-# In[27]:
+# In[12]:
 
 
 # Run your code by calling the function 
@@ -400,7 +455,7 @@ if __name__ == '__main__':
     p3_Dictionary_Manipulations(d,params)
 
 
-# In[128]:
+# In[17]:
 
 
 # ************************************************************************
@@ -415,10 +470,4 @@ if __name__ == '__main__':
     import doctest
     print("RUNNING UNIT TESTS - SEE THE LOG FOR FEEDBACK>>>")
     doctest.testmod(verbose=True)
-
-
-# In[ ]:
-
-
-
 
