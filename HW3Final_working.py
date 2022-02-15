@@ -179,7 +179,7 @@ if __name__ == '__main__':
     print("Ratio of quad/linear is greater than 1: ",round(quadratic_time/linear_time,3))
 
 
-# In[64]:
+# In[67]:
 
 
 # ************************************************************************
@@ -203,7 +203,7 @@ if __name__ == '__main__':
 # 4. Calcuate the ratio of quadratic time to linear time
 # 5. Display a table showing array size, linear time, quadratic time, and quadratic/linear time ratio
 
-# In[ ]:
+# In[182]:
 
 
 # Complete/Enter your code
@@ -216,7 +216,7 @@ Highx     = 20_000
 Increment = 2000
 
 # Set up table header
-print("Array Size        Linear          Quad   ratio")
+print("Array Size".ljust(20),"Linear".ljust(20),"Quad".ljust(20),"Ratio".ljust(20))
 
 # Set up arrays to hold values for run times
 size   = []
@@ -228,20 +228,23 @@ quad   = []
 for n in range(Lowx,Highx,Increment):
     
     # create a random array of integers from 0 to 999 of size n
-   
+    x = [random.randint(0,999) for n in range(n)]
+    
    
     # run the benchmark on each of the linear and quad functions
     lin_time    = p1_timeit_linear(x)
     quad_time   = p1_timeit_quad(x)
     
     # calculate the run time ratio of quadratic time to linear time
-    
+    ratio = quad_time/lin_time
     
     # print table showing array size, linear time, quadratic time and ratio of quadratic/linear time
-    
+    print("%-20s" % len(x),"%-20f" % lin_time,"%-20f" % quad_time,"%-20.3f" % ratio)
     
     #store the results in the arrays for plotting.
-    
+    size.append(len(x))
+    linear.append(lin_time)
+    quad.append(quad_time)
 
 
 # ### Create linear, log time and NlogN time curves
@@ -273,7 +276,7 @@ nlog_time = [item[2] for item in n_time]
 # 3. Plot the run time for your linear algorithm against the LogN curve
 # 4. Your figure should look something like the figures shown (note your run times will be different becuase of our environment)
 
-# In[ ]:
+# In[88]:
 
 
 # Complete/Enter your code
@@ -290,7 +293,7 @@ def plot_scenario(x,y1,y2,label1,label2,Title):
 
 # ### Figure 1:  Runtime for linear algorithm
 
-# In[ ]:
+# In[89]:
 
 
 plot_scenario(size,linear,log_time,"Linear","Log Time","Linear Algorithm")
