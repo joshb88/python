@@ -120,13 +120,6 @@ def p1_timeit_linear(x):
     return linear.timeit(number=1)
 
 
-# In[5]:
-
-
-x = [600,200,300,400,500]
-p1_timeit_linear(x)
-
-
 # ### Create a function to do a benchmark for quadratic algorithm using test using timeit.Timer
 # 1. Pass an array of random numbers and measure how long it takes to run the quadratic algorithm
 # 2. Set **t.timeit(number=1)**.  Otherwise the code will run much more slowly.
@@ -283,11 +276,20 @@ nlog_time = [item[2] for item in n_time]
 import matplotlib.pyplot as plt
 
 def plot_scenario(x,y1,y2,label1,label2,Title):
+    
+    #plots the y1 value against the x-axis with the label label2
     plt.plot(x, y1, label = label1)
+    
+    #plots the y2 value against the x-axis with the label label2
     plt.plot(x, y2, label = label2)
+    
+    #set title to Title
     plt.title(Title)
+    
+    #shows the legend
     plt.legend()
     
+    #prints the graph
     plt.show()                          
 
 
